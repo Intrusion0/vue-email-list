@@ -9,8 +9,12 @@
 </head>
 <body>
     
-    <div>
-
+    <div id="app">
+        <ul class="container">
+            <li v-for="email in emails">
+               {{ email }} 
+            </li>
+        </ul>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>

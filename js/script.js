@@ -4,12 +4,38 @@ Attraverso l’apposita API di Boolean
 https://flynn.boolean.careers/exercises/api/random/mail
 generare 10 indirizzi email
 e stamparli in pagina all’interno di una lista. (sempre untilizzando Vue)
+
+BONUS:
+Far comparire gli indirizzi email solamente quando sono stati tutti generati.
+
 */
 
 /*
 
-1. 
+--DONE  1. Creo l'istanza di Vue => new Vue()
+--DONE  2. Creo una proprietà a cui gli assegno valore null => x: null
+--DONE  3 Creo un ciclo for che verrà eseguito 10 volte all'interno di mounted() => for (let i = 0; i < 10; i++)
+    --DONE  3.1 Creo una variabile all'interno di mounted(), a cui assegno il valore di this => const self = this;
+    --DONE  3.2 All'interno del ciclo creo la richiesta che dovrà effettuare => axios .get .then
+        --DONE  3.2.1 Utilizzo l'endpoint apposito per generare l'email nel .get => https://flynn.boolean.careers/exercises/api/random/mail
+        --DONE  3.2.2 All'interno di .then assegno alla proprietà che avevo creato inizialmente il valore che mi restituirà la richiesta effettuata => self.email = argomento.x
 
 */
 
-console.log('Eccomi sono Vue email list');
+var app = new Vue({
+    el: '#app',
+    data: {
+        emails: []
+    },
+    mounted() {
+        const self = this;
+
+        for (let i = 0; i < 10; i++) {
+            axios
+            .get('https://flynn.boolean.careers/exercises/api/random/mail')
+            .then(function(element) {
+                self.emails.push(element.data.response);
+            });
+        }
+    }
+});
